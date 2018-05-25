@@ -69,18 +69,22 @@ public class OrderServiceImpl implements OrderService {
             for (ProductInOrder productInOrder1 : productInOrders) {
                 if (productInOrder1.getProduct().getId() == productInOrder.getProduct().getId()) {
                     productInOrder1.setQuantity(productInOrder1.getQuantity() + 1);
-                    Stocktaking stocktaking = stocktakingService.getByProduct(productInOrder.getProduct());
-                    stocktaking.setQuantity_product(stocktaking.getQuantity_product() - 1);
-                    stocktakingService.save(stocktaking);
+                    List<Stocktaking> stocktaking = stocktakingService.getByProduct(productInOrder.getProduct());
+                    for(int i = 0; i < stocktaking.size();i++) {
+                        stocktaking.get(i).setQuantity_product(stocktaking.get(i).getQuantity_product() - 1);
+                        stocktakingService.save(stocktaking.get(i));
+                    }
                     flag = true;
                 }
             }
             if (!flag) {
                 productInOrder.setQuantity(1);
                 productInOrders.add(productInOrder);
-                Stocktaking stocktaking = stocktakingService.getByProduct(productInOrder.getProduct());
-                stocktaking.setQuantity_product(stocktaking.getQuantity_product() - 1);
-                stocktakingService.save(stocktaking);
+                List<Stocktaking> stocktaking = stocktakingService.getByProduct(productInOrder.getProduct());
+                for (int i = 0; i < stocktaking.size(); i++) {
+                    stocktaking.get(i).setQuantity_product(stocktaking.get(i).getQuantity_product() - 1);
+                    stocktakingService.save(stocktaking.get(i));
+                }
             }
             order.setProductInOrders(productInOrders);
             orderRepository.save(order);
@@ -99,14 +103,13 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.save(order);
             productInOrder.setOrder(order);
             productInOrderRepository.save(productInOrder);
-            Stocktaking stocktaking = stocktakingService.getByProduct(productInOrder.getProduct());
-            stocktaking.setQuantity_product(stocktaking.getQuantity_product() - 1);
-            stocktakingService.save(stocktaking);
+            List <Stocktaking> stocktaking = stocktakingService.getByProduct(productInOrder.getProduct());
+            for ( int i = 0; i < stocktaking.size(); i++) {
+                stocktaking.get(i).setQuantity_product(stocktaking.get(i).getQuantity_product() - 1);
+                stocktakingService.save(stocktaking.get(i));
+            }
         }
-
-
     }
-
 
     @Override
     public void modify(OrderModifyForm form) {

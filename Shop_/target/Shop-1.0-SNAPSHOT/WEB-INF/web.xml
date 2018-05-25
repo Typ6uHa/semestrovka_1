@@ -15,26 +15,6 @@
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>default_encoding</param-name>
-            <!-- The encoding of the template files: -->
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <param-name>output_encoding</param-name>
-            <!-- The encoding of the template output; Note that you must set
-                 "ResponseCharacterEncodring" to "fromTemplate" for this to work! -->
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <param-name>locale</param-name>
-            <!-- Influences number and date/time formatting, etc. -->
-            <param-value>en_US</param-value>
-        </init-param>
-        <init-param>
-            <param-name>number_format</param-name>
-            <param-value>0.##########</param-value>
-        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 

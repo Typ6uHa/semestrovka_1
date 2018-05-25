@@ -34,7 +34,7 @@ public class StocktakingServiceImpl implements StocktakingService {
     }
 
     @Override
-    public Stocktaking getByProduct(Product product) {
+    public List<Stocktaking> getByProduct(Product product) {
         return stocktakingRepository.findByProduct(product);
     }
 

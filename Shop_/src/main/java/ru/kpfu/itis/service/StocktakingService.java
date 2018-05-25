@@ -15,7 +15,7 @@ public interface StocktakingService {
 
     Stocktaking getById(long id);
 
-    Stocktaking getByProduct(Product product);
+    List<Stocktaking> getByProduct(Product product);
 
     Stocktaking getByProductId(long id);
 
